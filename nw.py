@@ -10,7 +10,7 @@ for i in range(9):
      board.append(row[:])
 
 qbfile = open("te.txt", "r")
-
+board[1][1] = 1
 
 for aline in qbfile:
     values = aline.split()

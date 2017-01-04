@@ -1,10 +1,10 @@
-row= [0] * 9
+row = [0] * 9
 board = []
 point = 0
-ao = [1,2,3,4,5,6,7,8,9]
+ao = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 for i in range(9):
-     board.append(row[:])
+    board.append(row[:])
 
 # the game
 """board[0][1] = 2
@@ -42,7 +42,9 @@ board[8][6] = 8
 board[8][7] = 3
 board[8][8] = 9
 """
-def pBoard(x,y,c):
+
+
+def pBoard(x, y, c):
     # the game
     board[0][1] = 2
     board[0][3] = 6
@@ -79,10 +81,9 @@ def pBoard(x,y,c):
     board[8][7] = 3
     board[8][8] = 9
     board[x][y] = c
-    
 
 
-pBoard(0,0,0)
+pBoard(0, 0, 0)
 
 
 def diff(a, b):
@@ -91,46 +92,46 @@ def diff(a, b):
     return xa + xb
 
 
-#check small cells
-def check0(x,y):
+# check small cells
+def check0(x, y):
     arr = []
     cor = board[x][y]
     # seperate big cells
-    big_cell_i = x//3
-    big_cell_j = y//3
+    big_cell_i = x // 3
+    big_cell_j = y // 3
 
     c = big_cell_i * 3
     v = big_cell_j * 3
 
     for dx in range(3):
         for dy in range(3):
-            if board[c+dx][v+dy] != 0:
-                arr.append(board[c+dx][v+dy])
-            #board[c + dx][v + dy] = "*"
-    return diff(arr,ao)
+            if board[c + dx][v + dy] != 0:
+                arr.append(board[c + dx][v + dy])
+                # board[c + dx][v + dy] = "*"
+    return diff(arr, ao)
 
 
-#check x
-def arr_h(x,y):
-    #global board
+# check x
+def arr_h(x, y):
+    # global board
     arr_h = []
-    for i in range (9):
+    for i in range(9):
         if board[x][y] == 0 and board[x][y] != board[x][i]:
-                arr_h.append(board[x][i])
-    return diff(arr_h,ao)
+            arr_h.append(board[x][i])
+    return diff(arr_h, ao)
 
 
-#check y
-def arr_v(x,y):
-    #global board
+# check y
+def arr_v(x, y):
+    # global board
     arr_v = []
     for i in range(9):
         if board[x][y] == 0 and board[x][y] != board[i][y]:
-                arr_v.append(board[i][y])
-    return diff(arr_v,ao)
+            arr_v.append(board[i][y])
+    return diff(arr_v, ao)
 
 
-def snc(ar1,ar2):
+def snc(ar1, ar2):
     ar3 = []
     for i in ar1:
         for e in ar2:
@@ -138,17 +139,44 @@ def snc(ar1,ar2):
                 ar3.append(i)
     return ar3[0:]
 
+
 def main_snc(x,y):
     if board[x][y] == 0:
         a1 = snc(arr_h(x, y), arr_v(x, y))
-        a2 = check0(x,y)
+        a2 = check0(x, y)
         c = snc(a1, a2)
-        #return (x,y),c
+        # return (x,y),c
         return c
-    else :
-        return  "a"
+    else:
+        return "a"
+
 
 #print(main_snc(0, 6))
+"""for i in range(9):
+    for e in range(9):
+        print(main_snc(i,e))
+"""
+
+def count_filled():
+    total = 0
+    for i in range(9):
+        for j in range(9):
+            if board[i][j] != 0:
+                total += 1
+    return total
+
+while(count_filled() != 81):
+    found = []
+    for i in range(9):
+        for j in range(9):
+             if board[i][j] == 0:
+                 result = main_snc(i,j)
+                 if len(result) == 1:
+                     found.append((i,j,result[0]))
+    print(found)
+    for (i,j,num) in found:
+        board[i][j] = num
+
 
 """def control():
     b  = 0
@@ -160,15 +188,12 @@ def main_snc(x,y):
                 return break
 """
 
-
 for i in range(9):
     for e in range(9):
-        if len(main_snc(i,e)) == 1 and main_snc(i,e) != "a" :
-            for d in main_snc(i,e):
-                pBoard(i,e,d)
+        if len(main_snc(i, e)) == 1 and main_snc(i, e) != "a":
+            for d in main_snc(i, e):
+                pBoard(i, e, d)
                 b = 0
-
-
 
 # draw first board
 for row in board:
@@ -180,6 +205,8 @@ for row in board:
             print(number, end=" ")
 
     print()
+
+
 
 
 #print(la(0,6))

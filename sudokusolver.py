@@ -1,3 +1,7 @@
+# I haven't got a good algorithm,
+# it work just simple sudoku problems it can check horizontally, vertically and small cells
+
+
 row = [0] * 9
 board = []
 point = 0
@@ -7,89 +11,48 @@ for i in range(9):
     board.append(row[:])
 
 # the game
-"""board[0][1] = 2
-board[0][3] = 6
-board[0][5] = 5
-board[1][4] = 3
-board[1][6] = 6
+board[0][0] = 9
+board[0][1] = 3
+board[0][4] = 4
+board[1][0] = 7
+board[1][5] = 8
 board[1][7] = 1
-board[2][0] = 7
-board[2][2] = 6
-board[2][6] = 3
-board[3][1] = 5
-board[3][3] = 2
-board[3][4] = 8
-board[3][6] = 1
-board[3][7] = 4
-board[4][1] = 4
-board[4][2] = 7
-board[4][5] = 3
-board[4][8] = 8
-board[5][6] = 9
-board[5][7] = 6
-board[6][4] = 9
-board[6][5] = 1
-board[7][1] = 7
-board[7][2] = 9
-board[7][6] = 4
-board[7][7] = 2
-board[7][8] = 1
-board[8][2] = 1
-board[8][3] = 4
-board[8][4] = 7
-board[8][5] = 2
-board[8][6] = 8
-board[8][7] = 3
-board[8][8] = 9
-"""
+board[2][0] = 8
+board[2][1] = 2
+board[2][4] = 7
+board[2][7] = 5
+board[2][8] = 4
+board[3][1] = 6
+board[3][3] = 1
+board[3][5] = 4
+board[4][0] = 4
+board[4][4] = 2
+board[4][6] = 6
+board[4][8] = 5
+board[5][0] = 3
+board[5][2] = 8
+board[6][0] = 1
+board[6][1] = 7
+board[6][3] = 2
+board[6][5] = 9
+board[6][7] = 6
+board[7][0] = 6
+board[7][1] = 9
+board[7][5] = 5
+board[7][7] = 4
+board[7][8] = 8
+board[8][1] = 8
+board[8][4] = 1
+board[8][5] = 6
+board[8][6] = 9
 
 
-def pBoard(x, y, c):
-    # the game
-    board[0][1] = 2
-    board[0][3] = 6
-    board[0][5] = 5
-    board[1][4] = 3
-    board[1][6] = 6
-    board[1][7] = 1
-    board[2][0] = 7
-    board[2][2] = 6
-    board[2][6] = 3
-    board[3][1] = 5
-    board[3][3] = 2
-    board[3][4] = 8
-    board[3][6] = 1
-    board[3][7] = 4
-    board[4][1] = 4
-    board[4][2] = 7
-    board[4][5] = 3
-    board[4][8] = 8
-    board[5][6] = 9
-    board[5][7] = 6
-    board[6][4] = 9
-    board[6][5] = 1
-    board[7][1] = 7
-    board[7][2] = 9
-    board[7][6] = 4
-    board[7][7] = 2
-    board[7][8] = 1
-    board[8][2] = 1
-    board[8][3] = 4
-    board[8][4] = 7
-    board[8][5] = 2
-    board[8][6] = 8
-    board[8][7] = 3
-    board[8][8] = 9
-    board[x][y] = c
-
-
-pBoard(0, 0, 0)
-
-
+# diff func1
 def diff(a, b):
     xa = [i for i in set(a) if i not in b]
     xb = [i for i in set(b) if i not in a]
     return xa + xb
+
 
 
 # check small cells
@@ -111,7 +74,7 @@ def check0(x, y):
     return diff(arr, ao)
 
 
-# check x
+# check horizontally
 def arr_h(x, y):
     # global board
     arr_h = []
@@ -121,7 +84,7 @@ def arr_h(x, y):
     return diff(arr_h, ao)
 
 
-# check y
+# check vertically
 def arr_v(x, y):
     # global board
     arr_v = []
@@ -131,6 +94,7 @@ def arr_v(x, y):
     return diff(arr_v, ao)
 
 
+# another check
 def snc(ar1, ar2):
     ar3 = []
     for i in ar1:
@@ -139,7 +103,7 @@ def snc(ar1, ar2):
                 ar3.append(i)
     return ar3[0:]
 
-
+# and another ...
 def main_snc(x,y):
     if board[x][y] == 0:
         a1 = snc(arr_h(x, y), arr_v(x, y))
@@ -151,12 +115,7 @@ def main_snc(x,y):
         return "a"
 
 
-#print(main_snc(0, 6))
-"""for i in range(9):
-    for e in range(9):
-        print(main_snc(i,e))
-"""
-
+# total
 def count_filled():
     total = 0
     for i in range(9):
@@ -165,6 +124,8 @@ def count_filled():
                 total += 1
     return total
 
+
+# main func
 while(count_filled() != 81):
     found = []
     for i in range(9):
@@ -178,16 +139,6 @@ while(count_filled() != 81):
         board[i][j] = num
 
 
-"""def control():
-    b  = 0
-    for i in range(9):
-        for e in range(9):
-            if board[i][e] == 0:
-                b += 1
-            if b == 0 :
-                return break
-"""
-
 for i in range(9):
     for e in range(9):
         if len(main_snc(i, e)) == 1 and main_snc(i, e) != "a":
@@ -195,7 +146,7 @@ for i in range(9):
                 pBoard(i, e, d)
                 b = 0
 
-# draw first board
+# draw board
 for row in board:
     for number in row:
         if number == 0:
@@ -205,11 +156,5 @@ for row in board:
             print(number, end=" ")
 
     print()
-
-
-
-
-#print(la(0,6))
-#def check_fnl():
 
 

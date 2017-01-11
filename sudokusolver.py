@@ -11,40 +11,43 @@ for i in range(9):
     board.append(row[:])
 
 # the game
-board[0][0] = 9
-board[0][1] = 3
-board[0][4] = 4
-board[1][0] = 7
-board[1][5] = 8
-board[1][7] = 1
-board[2][0] = 8
-board[2][1] = 2
-board[2][4] = 7
-board[2][7] = 5
-board[2][8] = 4
-board[3][1] = 6
-board[3][3] = 1
-board[3][5] = 4
-board[4][0] = 4
-board[4][4] = 2
-board[4][6] = 6
-board[4][8] = 5
-board[5][0] = 3
-board[5][2] = 8
-board[6][0] = 1
-board[6][1] = 7
-board[6][3] = 2
-board[6][5] = 9
-board[6][7] = 6
-board[7][0] = 6
-board[7][1] = 9
-board[7][5] = 5
-board[7][7] = 4
-board[7][8] = 8
-board[8][1] = 8
-board[8][4] = 1
-board[8][5] = 6
-board[8][6] = 9
+board[0][1] = 9
+board[0][3] = 2
+board[0][5] = 4
+board[0][6] = 5
+board[1][1] = 2
+board[1][4] = 5
+board[1][5] = 7
+board[1][6] = 6
+board[1][7] = 3
+board[1][8] = 1
+board[2][0] = 6
+board[2][1] = 7
+board[2][4] = 1
+board[3][0] = 7
+board[3][1] = 5
+board[3][2] = 9
+board[4][0] = 3
+board[4][3] = 8
+board[4][5] = 6
+board[4][8] = 7
+board[5][6] = 3
+board[5][7] = 1
+board[5][8] = 4
+board[6][4] = 9
+board[6][7] = 8
+board[6][8] = 3
+board[7][0] = 8
+board[7][1] = 6
+board[7][2] = 2
+board[7][3] = 1
+board[7][4] = 4
+board[7][7] = 9
+board[8][2] = 4
+board[8][3] = 7
+board[8][5] = 5
+board[8][7] = 2
+
 
 
 # diff func1
@@ -102,6 +105,7 @@ def snc(ar1, ar2):
             if i == e:
                 ar3.append(i)
     return ar3[0:]
+
 
 # and another ...
 def main_snc(x,y):
